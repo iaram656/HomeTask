@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Gestor Familiar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-container">
+    <ion-card class="welcome-card">
+      <ion-img src="assets/family_tasks.png" alt="Family tasks"></ion-img> 
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">¡Hola, bienvenido/a!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Gestiona las tareas de tu hogar de forma sencilla.
+      </ion-card-content>
+    </ion-card>
+
+    <div class="button-group">
+      <ion-button expand="block" color="secondary" (click)="goToTasksPage()">
+        <ion-icon name="list-outline" slot="start"></ion-icon>
+        Ver Tareas
+      </ion-button>
+
+      <ion-button expand="block" color="success" (click)="goToAddTaskPage()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Añadir Nueva Tarea
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
