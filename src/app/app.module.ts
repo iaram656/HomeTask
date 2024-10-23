@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { AnadirTareaComponent } from './components/anadir-tarea/anadir-tarea.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { TareaService } from 'src/servicios/tarea.service';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AnadirTareaComponent],
+  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TareaService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { User } from 'src/clases/user';
 import { TareaService } from 'src/servicios/tarea.service';
+import { UserService } from 'src/servicios/user.service';
 
 @Component({
   selector: 'app-anadir-tarea',
@@ -9,15 +12,22 @@ import { TareaService } from 'src/servicios/tarea.service';
 })
 export class AnadirTareaComponent {
   tareaForm: FormGroup;
-  usuarios: string[] = ['Juan', 'María', 'Pedro', 'Ana']; 
+  usuarios: User[] = []; 
 
-  constructor(private fb: FormBuilder, private tareaService: TareaService) {
+  constructor(private fb: FormBuilder, private tareaService: TareaService, private navCtrl: NavController , private userService: UserService) {
 
     this.tareaForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(5)]],
       limitDate: ['', Validators.required],
       userId: ['']
     });
+  }
+
+  ngOnInit(){
+    console.log("aa")
+    this.userService.getUsers().subscribe(c => {
+      this.usuarios = c;
+    })
   }
 
   onSubmit() {
@@ -32,5 +42,9 @@ export class AnadirTareaComponent {
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  goBackHome() {
+    this.navCtrl.navigateBack('/home'); // Cambiar '/home' a la ruta correcta si es necesario
   }
 }

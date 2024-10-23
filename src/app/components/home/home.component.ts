@@ -13,6 +13,8 @@ export class HomeComponent {
   ngOnInit() {
   }
   goToTasksPage() {
+    this.navCtrl.navigateForward('/tareas'); 
+
   }
 
   goToAddTaskPage() {
