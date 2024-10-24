@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title class="ion-text-center">Inberrekuek</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,6 +15,18 @@
       <ion-card-title class="ion-text-center">Iteko lanak</ion-card-title>
     </ion-card-header>
   </ion-card>
+  <form [formGroup]="tareaForm">
+    <ion-item>
+      <ion-select formControlName="users" placeholder="Aukerau pertsona bat">
+        <ion-select-option value="1">Oihan</ion-select-option>
+        <ion-select-option value="2">Eneritz</ion-select-option>
+        <ion-select-option value="3">Ama</ion-select-option>
+        <ion-select-option value="4">Aita</ion-select-option>
+        <ion-select-option value="5">Ioritz</ion-select-option>
+        <ion-select-option value="0">Iñoi jarrigabeko lanak</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
 
   <!-- Mostrar mensaje si no hay tareas -->
   <ion-card *ngIf="tareas.length === 0">
@@ -26,21 +43,49 @@
 
   <!-- Lista de tareas -->
   <ion-list>
-    <ion-item *ngFor="let tarea of tareas">
-
+    <ion-item *ngFor="let tarea of tareasFiltradas">
       <ion-label style="max-width: 80%;">
         <h2>{{ tarea.description }}</h2>
         <p><strong>Noizko inber:</strong> {{ tarea.limitDate | date: 'dd/MM/yyyy HH:mm' }}</p>
-        <p *ngIf="getUserNameById(tarea.userId) === 'Iño ez'" style="color: red; font-style: italic;">
-          Iño ez
-        </p>
-        <p *ngIf="getUserNameById(tarea.userId) !== 'Iño ez'"><strong>Zeñek inber:</strong> {{getUserNameById(tarea.userId)}}</p> 
       </ion-label>
-      <ion-label style="max-width: 20%;" class="ion-text-end">
-        <ion-button fill="clear" size="small" (click)="editTarea(tarea)">
-          <ion-icon slot="icon-only" name="pencil"></ion-icon>
-        </ion-button>
+    
+      <!-- Contenedor para el nombre del usuario, íconos y botón de edición -->
+      <ion-label style="max-width: 20%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end;">
+        <!-- Nombre del usuario con fondo pastel y texto negro -->
+        <span [ngStyle]="{'background-color': userColors[tarea.userId], 'color': '#000', 'padding': '4px 8px', 'border-radius': '5px', 'margin-bottom': '4px'}">
+          {{ getUserNameById(tarea.userId) }}
+        </span>
+    
+        <!-- Icono de estado de la tarea -->
+        <div style="display: flex; align-items: center;">
+          <ion-icon 
+            *ngIf="!tarea.status" 
+            name="time" 
+            color="danger" 
+            title="Tarea no completada" 
+            style="margin-right: 2px;">
+          </ion-icon>
+          <ion-icon 
+            *ngIf="tarea.status" 
+            name="checkmark-circle" 
+            color="success" 
+            title="Tarea completada" 
+            style="margin-right: 2px;">
+          </ion-icon>
+    
+          <!-- Botón de edición -->
+          <ion-button fill="clear" size="small" (click)="editTarea(tarea)">
+            <ion-icon slot="icon-only" name="pencil"></ion-icon>
+          </ion-button>
+        </div>
       </ion-label>
     </ion-item>
+    
+    
+    
+    <ion-button expand="block" color="secondary" (click)="goBackHome()" class="back-button">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Atzea
+    </ion-button>
   </ion-list>
 </ion-content>

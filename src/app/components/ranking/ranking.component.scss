@@ -1,0 +1,66 @@
+.ranking-container {
+    text-align: center;
+  }
+  
+  .ranking-header {
+    margin-bottom: 20px;
+  }
+  
+  .ranking-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    background: #454545;
+    border: 1px solid #454545;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    transition: transform 0.2s;
+  }
+  
+  .ranking-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    text-align: left;
+  }
+
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 16px;
+  }
+  
+  .user-info h3 {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+  }
+  
+  .trophy-icon {
+    margin-left: 10px;
+    font-size: 22px;
+  }
+  
+  

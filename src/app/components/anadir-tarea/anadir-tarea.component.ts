@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { User } from 'src/clases/user';
 import { TareaService } from 'src/servicios/tarea.service';
 import { UserService } from 'src/servicios/user.service';
@@ -13,8 +13,9 @@ import { UserService } from 'src/servicios/user.service';
 export class AnadirTareaComponent {
   tareaForm: FormGroup;
   usuarios: User[] = []; 
-
-  constructor(private fb: FormBuilder, private tareaService: TareaService, private navCtrl: NavController , private userService: UserService) {
+  gordetzen = false;
+  showCalendar = false;
+  constructor(private fb: FormBuilder, private alertController: AlertController, private tareaService: TareaService, private navCtrl: NavController , private userService: UserService) {
 
     this.tareaForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(5)]],
@@ -30,20 +31,39 @@ export class AnadirTareaComponent {
     })
   }
 
+  toggleCalendar() {
+    this.showCalendar = !this.showCalendar; // Alterna entre mostrar y ocultar el calendario
+  }
+
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: message,
+      buttons: ['ITXI']
+    });
+    await alert.present();
+  }
+  
   onSubmit() {
     if (this.tareaForm.valid) {
-      this.tareaService.addTarea(this.tareaForm.value).subscribe(c =>{
-        if(c){
-          alert('Tarea añadida correctamente');
-        }else{
-          alert('Error al añadir la tarea');
+      if (this.tareaForm.value.userId === '') {
+        this.tareaForm.value.userId = 0;
+      }
+      this.gordetzen = true;
+      this.tareaService.addTarea(this.tareaForm.value).subscribe(async c => {
+        if (c) {
+          await this.presentAlert('Lana ondo gehitu da');
+          this.navCtrl.navigateBack('/home');
+        } else {
+          await this.presentAlert('Ezin izenda gehitu lana');
+          this.gordetzen = false;
         }
       });
     } else {
-      console.log('Formulario no válido');
+      console.log('Error');
     }
   }
-
   goBackHome() {
     this.navCtrl.navigateBack('/home'); // Cambiar '/home' a la ruta correcta si es necesario
   }

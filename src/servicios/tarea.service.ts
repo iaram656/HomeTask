@@ -28,8 +28,29 @@ export class TareaService {
     );;
   }
 
+  updateTarea(id: string, tarea: Tarea): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl+id, JSON.stringify(tarea), this.httpOptions()).pipe(
+      retry(5),  // Reintentar hasta 5 veces en caso de error
+      catchError((error) => {
+        console.error('Error al obtener las tareas:', error);
+        throw error;  // Lanza el error para manejarlo fuera si es necesario
+      })
+    );;
+  }
+
   getTareas(): Observable<Tarea[]> {
     return this.http.get<Tarea[]>(this.apiUrl)
+      .pipe(
+        retry(5),  // Reintentar hasta 5 veces en caso de error
+        catchError((error) => {
+          console.error('Error al obtener las tareas:', error);
+          throw error;  // Lanza el error para manejarlo fuera si es necesario
+        })
+      );
+  }
+
+  getTarea(id: string): Observable<Tarea>{
+    return this.http.get<Tarea>(this.apiUrl+id)
       .pipe(
         retry(5),  // Reintentar hasta 5 veces en caso de error
         catchError((error) => {

@@ -12,9 +12,11 @@ import { AnadirTareaComponent } from './components/anadir-tarea/anadir-tarea.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { TareaService } from 'src/servicios/tarea.service';
+import { TareaComponent } from './components/tarea/tarea.component';
+import { RankingComponent } from './components/ranking/ranking.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent],
+  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent, TareaComponent, RankingComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TareaService],
   bootstrap: [AppComponent],

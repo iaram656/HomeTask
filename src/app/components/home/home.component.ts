@@ -20,4 +20,8 @@ export class HomeComponent {
   goToAddTaskPage() {
     this.navCtrl.navigateForward('/anadir-tarea'); 
   }
+
+  goToRanking(){
+    this.navCtrl.navigateForward('/ranking');
+  }
 }

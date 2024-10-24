@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Rankiñe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ranking-container">
+    <div class="ranking-header">
+      <h2>Hilabete bukaeran azkena iteunak afaye lelenai</h2>
+    </div>
+    <div class="ranking-list">
+      <div *ngFor="let user of usuarios; let i = index" class="ranking-item">
+        <img [src]="getUserImage(user)" alt="User Image" class="user-image" />
+        
+        <div class="user-info">
+          <h3 style="color: white">
+            {{ user.name }}
+            <!-- Copa de oro para el primero -->
+            <ion-icon *ngIf="i === 0" name="trophy" color="warning" title="Primero" class="trophy-icon"></ion-icon>
+            <!-- Copa de plata para el segundo -->
+            <ion-icon *ngIf="i === 1" name="trophy" color="medium" title="Segundo" class="trophy-icon"></ion-icon>
+            <!-- Copa de bronce para el tercero -->
+            <ion-icon *ngIf="i === 2" name="trophy" color="tertiary" title="Tercero" class="trophy-icon"></ion-icon>
+
+            <ion-icon *ngIf="i === usuarios.length - 1" name="sad" color="danger" title="Último" class="trophy-icon"></ion-icon>
+
+          </h3>
+          <p style="color: white">Puntos: {{ user.puntos }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
