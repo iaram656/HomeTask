@@ -5,14 +5,17 @@ import { AnadirTareaComponent } from './components/anadir-tarea/anadir-tarea.com
 import { TareasComponent } from './components/tareas/tareas.component';
 import { TareaComponent } from './components/tarea/tarea.component';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from 'src/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'anadir-tarea', component: AnadirTareaComponent },
-  { path: 'tareas', component: TareasComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'edit-tarea/:id', component: TareaComponent },
-  { path: 'ranking', component: RankingComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'anadir-tarea', component: AnadirTareaComponent , canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  { path: 'tareas', component: TareasComponent , canActivate: [AuthGuard]},
+  { path: 'home', component: HomeComponent , canActivate: [AuthGuard]},
+  { path: 'edit-tarea/:id', component: TareaComponent , canActivate: [AuthGuard]},
+  { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' },
 ];
 

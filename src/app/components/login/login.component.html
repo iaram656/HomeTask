@@ -1,0 +1,40 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Bienvenido</h1>
+      <p class="subtitle">Inicia sesión para continuar</p>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <ion-item lines="none">
+            <ion-select formControlName="username" 
+                      interface="popover" 
+                      placeholder="Selecciona un usuario"
+                      class="custom-select">
+              <ion-select-option *ngFor="let user of users" [value]="user">
+                {{ user }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="form-group">
+          <ion-item lines="none">
+            <ion-input type="password" 
+                     formControlName="password" 
+                     placeholder="Contraseña"
+                     class="custom-input">
+            </ion-input>
+          </ion-item>
+        </div>
+
+        <ion-button expand="block" 
+                    type="submit" 
+                    class="login-button"
+                    shape="round">
+          Iniciar Sesión
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="custom-toolbar">
     <ion-buttons slot="start">
-      <ion-button (click)="goBackHome()">
+      <ion-button (click)="goBackHome()" class="back-button-header">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -10,82 +10,85 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title class="ion-text-center">Iteko lanak</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-  <form [formGroup]="tareaForm">
-    <ion-item>
-      <ion-select formControlName="users" placeholder="Aukerau pertsona bat">
-        <ion-select-option value="1">Oihan</ion-select-option>
-        <ion-select-option value="2">Eneritz</ion-select-option>
-        <ion-select-option value="3">Ama</ion-select-option>
-        <ion-select-option value="4">Aita</ion-select-option>
-        <ion-select-option value="5">Ioritz</ion-select-option>
-        <ion-select-option value="0">Iñoi jarrigabeko lanak</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </form>
+  <div class="content-container">
+    <div class="list-box">
+      <h1>Iteko lanak</h1>
 
-  <!-- Mostrar mensaje si no hay tareas -->
-  <ion-card *ngIf="tareas.length === 0">
-    <ion-card-content *ngIf="!cargando">
-      <p class="ion-text-center">Eztao lanik iteko. Ya me sorprende baño bueno</p>
-    </ion-card-content>
-    <ion-card-content *ngIf="cargando">
-      <p class="ion-text-center">
-        Kargatzen
-        <ion-spinner name="crescent"></ion-spinner>
-      </p>
-    </ion-card-content>
-  </ion-card>
+      <form [formGroup]="tareaForm" class="form-group">
+        <ion-item lines="none">
+          <ion-select formControlName="users" 
+                    interface="popover" 
+                    placeholder="Aukerau pertsona bat"
+                    class="custom-select">
+            <ion-select-option value="1">Oihan</ion-select-option>
+            <ion-select-option value="2">Eneritz</ion-select-option>
+            <ion-select-option value="3">Ama</ion-select-option>
+            <ion-select-option value="4">Aita</ion-select-option>
+            <ion-select-option value="5">Ioritz</ion-select-option>
+            <ion-select-option value="0">Iñoi jarrigabeko lanak</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </form>
 
-  <!-- Lista de tareas -->
-  <ion-list>
-    <ion-item *ngFor="let tarea of tareasFiltradas">
-      <ion-label style="max-width: 80%;">
-        <h2>{{ tarea.description }}</h2>
-        <p><strong>Noizko inber:</strong> {{ tarea.limitDate | date: 'dd/MM/yyyy HH:mm' }}</p>
-      </ion-label>
-    
-      <!-- Contenedor para el nombre del usuario, íconos y botón de edición -->
-      <ion-label style="max-width: 20%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end;">
-        <!-- Nombre del usuario con fondo pastel y texto negro -->
-        <span [ngStyle]="{'background-color': userColors[tarea.userId], 'color': '#000', 'padding': '4px 8px', 'border-radius': '5px', 'margin-bottom': '4px'}">
-          {{ getUserNameById(tarea.userId) }}
-        </span>
-    
-        <!-- Icono de estado de la tarea -->
-        <div style="display: flex; align-items: center;">
-          <ion-icon 
-            *ngIf="!tarea.status" 
-            name="time" 
-            color="danger" 
-            title="Tarea no completada" 
-            style="margin-right: 2px;">
-          </ion-icon>
-          <ion-icon 
-            *ngIf="tarea.status" 
-            name="checkmark-circle" 
-            color="success" 
-            title="Tarea completada" 
-            style="margin-right: 2px;">
-          </ion-icon>
-    
-          <!-- Botón de edición -->
-          <ion-button fill="clear" size="small" (click)="editTarea(tarea)">
-            <ion-icon slot="icon-only" name="pencil"></ion-icon>
-          </ion-button>
+      <!-- Mensaje sin tareas -->
+      <div class="empty-state" *ngIf="tareas.length === 0">
+        <div class="empty-content" *ngIf="!cargando">
+          <p>Eztao lanik iteko. Ya me sorprende baño bueno</p>
         </div>
-      </ion-label>
-    </ion-item>
-    
-    
-    
-    <ion-button expand="block" color="secondary" (click)="goBackHome()" class="back-button">
-      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
-      Atzea
-    </ion-button>
-  </ion-list>
+        <div class="empty-content" *ngIf="cargando">
+          <p>Kargatzen</p>
+          <ion-spinner name="crescent" class="custom-spinner"></ion-spinner>
+        </div>
+      </div>
+
+      <!-- Lista de tareas -->
+      <ion-list class="custom-list">
+        <ion-item *ngFor="let tarea of tareasFiltradas" lines="none" class="task-item">
+          <div class="task-content">
+            <div class="task-main">
+              <h2>{{ tarea.description }}</h2>
+              <p class="date-text">
+                <strong>Noizko inber:</strong> {{ tarea.limitDate | date: 'dd/MM/yyyy HH:mm' }}
+              </p>
+            </div>
+            
+            <div class="task-meta">
+              <span class="user-badge" [ngStyle]="{'background-color': userColors[tarea.userId]}">
+                {{ getUserNameById(tarea.userId) }}
+              </span>
+              
+              <div class="task-actions">
+                <ion-icon 
+                  *ngIf="!tarea.status" 
+                  name="time" 
+                  class="status-icon pending"
+                  title="Tarea no completada">
+                </ion-icon>
+                <ion-icon 
+                  *ngIf="tarea.status" 
+                  name="checkmark-circle" 
+                  class="status-icon completed"
+                  title="Tarea completada">
+                </ion-icon>
+                
+                <ion-button fill="clear" 
+                          class="edit-button"
+                          (click)="editTarea(tarea)">
+                  <ion-icon name="pencil"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" 
+                  class="back-button"
+                  (click)="goBackHome()"
+                  shape="round">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Atzea
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

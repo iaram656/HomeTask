@@ -1,37 +1,42 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="goBackHome()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">Rankiñe</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
   <div class="ranking-container">
-    <div class="ranking-header">
-      <h2>Hilabete bukaeran azkena iteunak afaye lelenai</h2>
+    <!-- Botón de regreso -->
+    <div class="back-button" (click)="goBackHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
     </div>
+
+    <!-- Header -->
+    <div class="ranking-header">
+      <h1>Rankiñe</h1>
+      <p class="subtitle">Hilabete bukaeran azkena iteunak afaye lelenai</p>
+    </div>
+
+    <!-- Lista de ranking -->
     <div class="ranking-list">
-      <div *ngFor="let user of usuarios; let i = index" class="ranking-item">
-        <img [src]="getUserImage(user)" alt="User Image" class="user-image" />
+      <div *ngFor="let user of usuarios; let i = index" 
+           class="ranking-card"
+           [class.top-three]="i < 3"
+           [ngClass]="{'first': i === 0, 'second': i === 1, 'third': i === 2, 'last': i === usuarios.length - 1}">
         
-        <div class="user-info">
-          <h3 style="color: white">
-            {{ user.name }}
-            <!-- Copa de oro para el primero -->
-            <ion-icon *ngIf="i === 0" name="trophy" color="warning" title="Primero" class="trophy-icon"></ion-icon>
-            <!-- Copa de plata para el segundo -->
-            <ion-icon *ngIf="i === 1" name="trophy" color="medium" title="Segundo" class="trophy-icon"></ion-icon>
-            <!-- Copa de bronce para el tercero -->
-            <ion-icon *ngIf="i === 2" name="trophy" color="tertiary" title="Tercero" class="trophy-icon"></ion-icon>
+        <div class="position-badge">{{i + 1}}</div>
+        
+        <div class="user-content">
+          <div class="user-image-container">
+            <img [src]="getUserImage(user)" alt="User Image" class="user-image" />
+            <!-- Medallas para los primeros -->
+            <div *ngIf="i === 0" class="medal gold">🏆</div>
+            <div *ngIf="i === 1" class="medal silver">🥈</div>
+            <div *ngIf="i === 2" class="medal bronze">🥉</div>
+            <div *ngIf="i === usuarios.length - 1" class="medal last">😢</div>
+          </div>
 
-            <ion-icon *ngIf="i === usuarios.length - 1" name="sad" color="danger" title="Último" class="trophy-icon"></ion-icon>
-
-          </h3>
-          <p style="color: white">Puntos: {{ user.puntos }}</p>
+          <div class="user-info">
+            <h2>{{ user.name }}</h2>
+            <div class="points">
+              <span class="points-value">{{ user.puntos }}</span>
+              <span class="points-label">puntos</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -14,9 +14,10 @@ import { TareasComponent } from './components/tareas/tareas.component';
 import { TareaService } from 'src/servicios/tarea.service';
 import { TareaComponent } from './components/tarea/tarea.component';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent, TareaComponent, RankingComponent],
+  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent, TareaComponent, RankingComponent, LoginComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TareaService],
   bootstrap: [AppComponent],
