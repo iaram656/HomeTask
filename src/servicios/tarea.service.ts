@@ -7,7 +7,7 @@ import { Tarea } from 'src/clases/tarea';
   providedIn: 'root'
 })
 export class TareaService {
-  private apiUrl = 'http://192.168.0.20:5020/Tarea/'; // Cambia la URL según corresponda
+  private apiUrl = 'https://hometaskapi-1.onrender.com/Tarea/'; // Cambia la URL según corresponda
 
   constructor(private http: HttpClient) { }
 

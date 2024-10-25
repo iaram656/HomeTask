@@ -8,7 +8,7 @@ import { User } from 'src/clases/user';
 })
 export class UserService {
 
-  private apiUrl = 'http://192.168.0.20:5020/User/'; // Cambia la URL según corresponda
+  private apiUrl = 'https://hometaskapi-1.onrender.com/User/'; // Cambia la URL según corresponda
   constructor(private http: HttpClient) { }
 
   httpOptions(){
