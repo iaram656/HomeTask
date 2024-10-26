@@ -12,6 +12,7 @@ import { AuthService } from 'src/servicios/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  iniciando: boolean= false;
   users: String[] = ["Aita", "Ama", "Eneritz", "Oihan", "Ioritz"]
   constructor(private formBuilder: FormBuilder,private alertController: AlertController, private authService: AuthService, private http: HttpClient, private navCtrl: NavController) {
     this.loginForm = this.formBuilder.group({
@@ -31,6 +32,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.iniciando = true;
       const { username, password } = this.loginForm.value;
       this.http.post('https://hometaskapi-1.onrender.com/login', { username, password }).pipe(
         retry(3),  // Reintentar hasta 5 veces en caso de error
@@ -46,6 +48,7 @@ export class LoginComponent {
           }else{
             await this.presentAlert('Kontraseñie gaxki dao');          
           }
+          this.iniciando=false;
         }
       )
     }

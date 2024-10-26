@@ -1,8 +1,8 @@
 <ion-content class="ion-padding">
   <div class="login-container">
     <div class="login-box">
-      <h1>Bienvenido</h1>
-      <p class="subtitle">Inicia sesión para continuar</p>
+      <h1>HOME TASK</h1>
+      <p class="subtitle">Sartu erabiltzailie ta kontraseñie</p>
       
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -29,10 +29,16 @@
         </div>
 
         <ion-button expand="block" 
-                    type="submit" 
-                    class="login-button"
-                    shape="round">
-          Iniciar Sesión
+          type="submit" 
+          class="login-button" 
+          shape="round" 
+          [disabled]="iniciando">
+        <ng-container *ngIf="!iniciando; else loading">
+        Sartu
+        </ng-container>
+        <ng-template #loading>
+        Sartzen <ion-spinner name="crescent" style="margin-left: 8px;"></ion-spinner>
+        </ng-template>
         </ion-button>
       </form>
     </div>
