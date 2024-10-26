@@ -17,9 +17,9 @@
       <form [formGroup]="tareaForm" class="form-group">
         <ion-item lines="none">
           <ion-select formControlName="users" 
-                    interface="popover" 
-                    placeholder="Aukerau pertsona bat"
-                    class="custom-select">
+                      interface="popover" 
+                      placeholder="Aukerau pertsona bat"
+                      class="custom-select">
             <ion-select-option value="1">Oihan</ion-select-option>
             <ion-select-option value="2">Eneritz</ion-select-option>
             <ion-select-option value="3">Ama</ion-select-option>
@@ -30,8 +30,19 @@
         </ion-item>
       </form>
 
+      <!-- Selección de Fecha -->
+      <div class="date-selector">
+        <ion-button fill="clear" (click)="previousDay()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <span style="color:white">{{ selectedDate | date: 'EEEE, dd/MM/yyyy' }}</span>
+        <ion-button fill="clear" (click)="nextDay()">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+
       <!-- Mensaje sin tareas -->
-      <div class="empty-state" *ngIf="tareas.length === 0">
+      <div class="empty-state" *ngIf="filteredTareas.length === 0">
         <div class="empty-content" *ngIf="!cargando">
           <p>Eztao lanik iteko. Ya me sorprende baño bueno</p>
         </div>
@@ -41,9 +52,9 @@
         </div>
       </div>
 
-      <!-- Lista de tareas -->
+      <!-- Lista de tareas filtradas por fecha -->
       <ion-list class="custom-list">
-        <ion-item *ngFor="let tarea of tareasFiltradas" lines="none" class="task-item">
+        <ion-item *ngFor="let tarea of filteredTareas" lines="none" class="task-item">
           <div class="task-content">
             <div class="task-main">
               <h2>{{ tarea.description }}</h2>
@@ -72,8 +83,8 @@
                 </ion-icon>
                 
                 <ion-button fill="clear" 
-                          class="edit-button"
-                          (click)="editTarea(tarea)">
+                            class="edit-button"
+                            (click)="editTarea(tarea)">
                   <ion-icon name="pencil"></ion-icon>
                 </ion-button>
               </div>

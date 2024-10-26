@@ -12,9 +12,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './tareas.component.html',
   styleUrls: ['./tareas.component.scss']
 })
-export class TareasComponent {
+export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
-  cargando : boolean = true;
+  cargando: boolean = true;
   usuarios: User[] = [];
   tareaForm: FormGroup;
   userColors: { [key: string]: string } = {
@@ -24,73 +24,106 @@ export class TareasComponent {
     '3': '#FFFFBA', // Pastel amarillo
     '4': '#BAFFC9', // Pastel verde
     '5': '#BAE1FF', // Pastel azul
-    // Añade más usuarios y colores si es necesario
   };
-  
-  tareasFiltradas: Tarea[] = []; // Nueva propiedad para almacenar las tareas filtradas 
-  constructor(private fb: FormBuilder,  private tareaService: TareaService,private router: Router, private userService: UserService, private navCtrl: NavController) {
+
+  tareasFiltradas: Tarea[] = []; // Para almacenar las tareas filtradas por usuario
+  filteredTareas: Tarea[] = []; // Para almacenar las tareas filtradas por fecha
+
+  selectedDate: Date = new Date(); // Fecha seleccionada
+
+  constructor(
+    private fb: FormBuilder,
+    private tareaService: TareaService,
+    private router: Router,
+    private userService: UserService,
+    private navCtrl: NavController
+  ) {
     this.tareaForm = this.fb.group({
       users: [''],
     });
-    this.tareaForm.get('users')?.valueChanges.subscribe(selectedUserId => {
+
+    // Filtro de tareas por usuario al cambiar el valor
+    this.tareaForm.get('users')?.valueChanges.subscribe((selectedUserId) => {
       this.filtrarTareas(selectedUserId);
+      this.filterTasksByDate();
     });
   }
-  ngOnInit(){
+
+  ngOnInit() {
     this.ionViewWillEnter();
-  }
-  getUserColorById(userId: string): string {
-    // Devuelve el color correspondiente al usuario o un color por defecto si no está asignado
-    return this.userColors[userId] || '#888'; // Gris por defecto
-  }
-  filtrarTareas(selectedUserId: string) {
-    if (selectedUserId) {
-      this.tareasFiltradas = this.tareas.filter(tarea => tarea.userId.toString() === selectedUserId); // Filtra tareas por userId
-    } else {
-      this.tareasFiltradas = this.tareas; // Si no hay selección, muestra todas las tareas
-    }
   }
 
   ionViewWillEnter() {
-    console.log("bb");
     this.obtenerTareas();
-    this.userService.getUsers().subscribe(c => {
+    this.userService.getUsers().subscribe((c) => {
       this.usuarios = c;
     });
   }
 
-  getUserNameById(userId: number): string {
-    const user = this.usuarios.find(u => u.id === userId); // Encuentra el usuario por ID
-    return user ? user.name : 'Iño ez'; // Retorna el nombre o un mensaje si no se encuentra
-  }
-
-  
-  
-
   obtenerTareas() {
     this.tareaService.getTareas().subscribe(
       (data: Tarea[]) => {
-        // Ordenar las tareas por la fecha de límite (limitDate)
         this.tareas = data.sort((a, b) => {
-          const fechaA = new Date(a.limitDate).getTime();  // Convertir la fecha a timestamp
+          const fechaA = new Date(a.limitDate).getTime();
           const fechaB = new Date(b.limitDate).getTime();
-          return fechaB -fechaA; // Orden ascendente (más antigua primero)
+          return fechaB - fechaA;
         });
-  
+
         this.cargando = false;
         this.tareasFiltradas = this.tareas;
+        this.filterTasksByDate(); // Filtro inicial por fecha seleccionada
       },
       (error: any) => {
         console.error('Error al obtener las tareas', error);
       }
     );
   }
-  
+
+  getUserColorById(userId: string): string {
+    return this.userColors[userId] || '#888'; // Gris por defecto
+  }
+
+  getUserNameById(userId: number): string {
+    const user = this.usuarios.find((u) => u.id === userId);
+    return user ? user.name : 'Iño ez';
+  }
+
+  filtrarTareas(selectedUserId: string) {
+    if (selectedUserId) {
+      this.tareasFiltradas = selectedUserId === '6' ? this.tareas : this.tareas.filter(tarea => tarea.userId.toString() === selectedUserId);
+    } else {
+      this.tareasFiltradas = this.tareas;
+    }
+    this.filterTasksByDate(); // Filtrar también por fecha seleccionada
+  }
+
+  filterTasksByDate() {
+    // Filtro por fecha seleccionada o fechas futuras
+    this.filteredTareas = this.tareasFiltradas.filter((tarea) => {
+      const tareaDate = new Date(tarea.limitDate);
+      return tareaDate >= this.selectedDate;
+    });
+  }
+
+  nextDay() {
+    this.selectedDate = new Date(this.selectedDate.getTime());
+
+    this.selectedDate.setDate(this.selectedDate.getDate() + 1);
+    this.filterTasksByDate();
+  }
+
+  previousDay() {
+    this.selectedDate = new Date(this.selectedDate.getTime());
+
+    this.selectedDate.setDate(this.selectedDate.getDate() - 1);
+    this.filterTasksByDate();
+  }
 
   editTarea(tarea: Tarea) {
-    this.router.navigate(['/edit-tarea', tarea.id]); // Cambiar '/edit-tarea' a la ruta correcta si es necesario    
+    this.router.navigate(['/edit-tarea', tarea.id]);
   }
+
   goBackHome() {
-    this.navCtrl.navigateBack('/home'); // Cambiar '/home' a la ruta correcta si es necesario
+    this.navCtrl.navigateBack('/home');
   }
 }
