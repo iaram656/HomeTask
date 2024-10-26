@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()" class="back-button-header">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Penalizaziyuek</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="content-container">
+    <div class="list-box">
+      <h1>Penalizaziyuek</h1>
+      <ion-button expand="block" 
+      class="back-button"
+      style="margin-bottom: 8%;"
+      (click)="addPen()"
+      shape="round">
+    <ion-icon name="add-outline" slot="start"></ion-icon>
+    Gehitu penalizaziyue
+    </ion-button>
+      
+
+      <div class="empty-state" *ngIf="penalizaziyuek.length === 0">
+        <div class="empty-content" *ngIf="!cargando">
+          <p>Eztao lanik iteko</p>
+        </div>
+        <div class="empty-content" *ngIf="cargando">
+          <p>Kargatzen</p>
+          <ion-spinner name="crescent" class="custom-spinner"></ion-spinner>
+        </div>
+      </div>
+      <!-- Lista de tareas filtradas por fecha -->
+      <ion-list class="custom-list">
+        <ion-item *ngFor="let pen of penalizaziyuek" lines="none" class="task-item">
+          <div class="task-content">
+            <div class="task-main">
+                <span 
+                    class="user-badge" 
+                    [ngStyle]="{'background-color': userColors[pen.userId]}"
+                >
+                    {{ getUserNameById(pen.userId) }}
+                </span>
+        
+                <p class="date-text">
+                    <strong>Noiz:</strong> {{ pen.date | date: 'dd/MM/yyyy' }}
+                </p>
+            </div>
+            
+            <p class="reason-text">
+                <strong>Zeba:</strong> {{ pen.reason }}
+            </p>
+            
+            <p class="points-text">
+                <strong>Puntuek:</strong> {{ pen.points }}
+            </p>
+        </div>
+        
+        
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" 
+                  class="back-button"
+                  (click)="goBackHome()"
+                  shape="round">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Atzea
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

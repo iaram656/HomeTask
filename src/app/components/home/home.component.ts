@@ -24,4 +24,7 @@ export class HomeComponent {
   goToRanking(){
     this.navCtrl.navigateForward('/ranking');
   }
+  goToPenalizationsPage(){
+    this.navCtrl.navigateForward('/penalizaziyuek');
+  }
 }

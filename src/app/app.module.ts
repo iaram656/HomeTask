@@ -15,9 +15,12 @@ import { TareaService } from 'src/servicios/tarea.service';
 import { TareaComponent } from './components/tarea/tarea.component';
 import { RankingComponent } from './components/ranking/ranking.component';
 import { LoginComponent } from './components/login/login.component';
+import { environment } from 'src/environments/environment';
+import { PenalizaziyuekComponent } from './components/penalizaziyuek/penalizaziyuek.component';
+import { PenalizaziyoDanakComponent } from './components/penalizaziyo-danak/penalizaziyo-danak.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent, TareaComponent, RankingComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, AnadirTareaComponent, TareasComponent, TareaComponent, RankingComponent, PenalizaziyoDanakComponent, PenalizaziyuekComponent, LoginComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TareaService],
   bootstrap: [AppComponent],

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackHome()" class="back-button-header">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Penalizaziyuek</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <div class="form-box">
+      <h1>Penalizaziyuek</h1>
+      
+      
+
+      <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <ion-item lines="none">
+            <ion-select formControlName="userId" 
+                      interface="popover" 
+                      placeholder="Zeñi"
+                      class="custom-select">
+              <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                {{ usuario.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div class="form-group">
+          <ion-item lines="none">
+            <ion-select formControlName="reason" 
+                      interface="popover" 
+                      placeholder="Arrazoye"
+                      class="custom-select">
+              <ion-select-option value="Zapatak sukaldin laga">Zapatak sukaldin laga</ion-select-option>
+              <ion-select-option value="Balletie ez sekau">Balletie ez sekau</ion-select-option>
+              <ion-select-option value="Kafie ez kendu kafeteratik">Kafie ez kendu kafeteratik</ion-select-option>
+              <ion-select-option value="Ontziyek garbitutakun fregaderi zikiñe">Ontziyek garbitutakun fregaderi zikiñe</ion-select-option>
+              <ion-select-option value="Dutxako toallie gaxki">Dutxako toallie gaxki</ion-select-option>
+              <ion-select-option value="Komedorien eon ta txukundu gabe">Komedorien eon ta txukundu gabe</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-note color="danger" *ngIf="tareaForm.get('reason')?.invalid && tareaForm.get('reason')?.touched">
+            Aukerau penalizaziyo bat
+          </ion-note>
+        </div>
+
+        
+        <ion-button expand="block" 
+                    type="submit" 
+                    class="submit-button"
+                    [disabled]="tareaForm.invalid || gordetzen"
+                    shape="round">
+          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+          Sortu penalizaziyue
+        </ion-button>
+
+        <ion-button expand="block" 
+                    class="back-button"
+                    (click)="goBackHome()"
+                    shape="round">
+          <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+          Atzea
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,272 @@
+ion-content {
+    --background: #1a1a1a;
+  }
+  
+  .custom-toolbar {
+    --background: #2d2d2d;
+    --color: #ffffff;
+    border-bottom: 1px solid #3d3d3d;
+  }
+  
+  .back-button-header {
+    --color: #7047EB;
+  }
+  
+  .content-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .list-box {
+    background: #2d2d2d;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    border: 1px solid #3d3d3d;
+    animation: fadeInUp 0.5s ease;
+  }
+  
+  h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 30px;
+  }
+  
+  ion-item {
+    --background: #363636;
+    --border-radius: 10px;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --min-height: 50px;
+    --border-color: #4d4d4d;
+    --highlight-color-focused: #7047EB;
+    margin-bottom: 15px;
+  }
+  
+  ion-item::part(native) {
+    border-radius: 10px;
+  }
+  
+  .custom-select {
+    --padding-start: 10px;
+    --placeholder-color: #808080;
+    --placeholder-opacity: 1;
+    font-size: 16px;
+    color: #ffffff;
+    width: 100%;
+  }
+  
+  .empty-state {
+    background: #363636;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+  }
+  
+  .custom-spinner {
+    color: #7047EB;
+    margin-top: 10px;
+  }
+  
+  .custom-list {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .task-item {
+    margin-bottom: 15px;
+    --background: #363636;
+    --border-radius: 10px;
+  }
+  
+  .task-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px 0;
+  }
+  
+  .task-main {
+    flex: 1;
+    padding-right: 15px;
+  }
+  
+  .task-main h2 {
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+  }
+  
+  .date-text {
+    color: #b3b3b3;
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .task-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 100px;
+  }
+  
+  .user-badge {
+    background-color: #7047EB;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .task-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  
+  .status-icon.pending {
+    color: #ff4961;
+  }
+  
+  .status-icon.completed {
+    color: #2dd36f;
+  }
+  
+  .edit-button {
+    --padding-start: 4px;
+    --padding-end: 4px;
+    --color: #7047EB;
+    height: 30px;
+  }
+
+  .task-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    background-color: #333; /* Fondo oscuro */
+    border-radius: 8px;
+    color: #fff;
+    gap: 10px;
+}
+
+.task-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.user-badge {
+    padding: 4px 8px;
+    color: #333; /* Color de texto oscuro para mejor contraste */
+    font-weight: bold;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.date-text, .reason-text, .points-text {
+    margin: 0;
+    color: #ccc; /* Color claro para buen contraste */
+}
+
+.reason-text {
+    font-weight: bold;
+}
+
+.points-text {
+    font-weight: bold;
+    color: #e57373; /* Color rojo para los puntos negativos */
+}
+
+  
+  .back-button {
+    --background: #363636;
+    --background-hover: #404040;
+    --background-activated: #404040;
+    --border-radius: 25px;
+    margin-top: 30px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  ion-select, .dropdown-content {
+    width: auto; /* Ajusta el ancho automáticamente según el contenido */
+    min-width: 200px; /* Puedes ajustar el valor mínimo si lo prefieres */
+    max-width: 300px; /* Controla el ancho máximo para que no se extienda demasiado */
+}
+
+.dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste en varias líneas */
+    word-wrap: break-word; /* Ajusta el texto si es demasiado largo */
+    padding: 8px 16px; /* Agrega espacio para mejorar la legibilidad */
+    font-size: 14px; /* Asegura un tamaño de fuente adecuado */
+}
+
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .list-box {
+      padding: 30px 20px;
+    }
+  
+    h1 {
+      font-size: 24px;
+    }
+  
+    .task-content {
+      flex-direction: column;
+    }
+  
+    .task-meta {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+  
+    .user-badge {
+      margin-bottom: 0;
+    }
+  }
+
+  .date-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; // Espacio entre los elementos si es necesario
+    margin: 16px 0; // Margen para separarlo del contenido superior/inferior si es necesario
+  }
+  

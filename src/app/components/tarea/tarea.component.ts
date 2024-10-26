@@ -96,24 +96,49 @@ export class TareaComponent  implements OnInit {
     const description = this.tareaForm.value.description; // Guarda el valor de descripción en una variable para evitar llamadas repetidas
 
     if (description === "Ontziyek garbitu") {
-        user.puntos += 2;
-    } else if (description === "Ontziyek jaso") {
-        user.puntos += 1;
-    } else if (description === "Erropak ixigi") {
-        user.puntos += 2;
-    } else if (description === "Erropak jaso") {
-        user.puntos += 2;
-    } else if (description === "Bitrue garbitu") {
-        user.puntos += 1;
-    } else if (description === "Kumune garbitu") {
-        user.puntos += 2;
-    } else if (description === "Erretza pasa kuarto baten") {
-        user.puntos += 1;
-    } else if (description === "Kristelak garbitu") {
-        user.puntos += 2;
-    } else if (description === "Erretza pasa etxe osuen") {
-        user.puntos += 2;
-    }
+      user.puntos += 20;
+  } else if (description === "Ontziyek jaso") {
+      user.puntos += 10;
+  } else if (description === "Erropak ixigi") {
+      user.puntos += 20;
+  } else if (description === "Erropa txikiyek ixigi") {
+    user.puntos += 20;
+} else if (description === "Erropa haundiyek ixigi") {
+  user.puntos += 20;
+} else if (description === "Erropak jaso") {
+      user.puntos += 20;
+  } else if (description === "Bitrue garbitu") {
+      user.puntos += 10;
+  }else if (description === "Kumunzulue garbitu") {
+      user.puntos += 20;
+  } else if (description === "Kumuneko ispilue garbiu") {
+      user.puntos += 10;
+  } else if (description === "Erretza etxe osun") {
+      user.puntos += 20;
+  } else if (description === "Erretza kumun + sukalde") {
+      user.puntos += 10;
+  }else if (description === "Txabolan lanak") {
+    user.puntos += 30;
+}else if (description === "Txakurrei jana eman") {
+  user.puntos += 10;
+} else if (description === "Lorak ureztau") {
+  user.puntos += 10;
+}else if (description === "Lorak garbiu") {
+      user.puntos += 10;
+  } else if (description === "Kafie iñ") {
+    user.puntos += 10;
+}else if (description === "Bazkaye/afaye iñ") {
+      user.puntos += 20;
+  } else if (description === "5ok gaudenin mahai osue jaso") {
+      user.puntos += 10;
+  }else if (description === "Konprak iñ") {
+    user.puntos += 20;
+}else if (description === "Ogiye erosi") {
+  user.puntos += 10;
+}else if (description === "Basurie jeitsi") {
+  user.puntos += 10;
+}
+  
 
     
   }
@@ -122,24 +147,48 @@ export class TareaComponent  implements OnInit {
     const description = this.tareaForm.value.description; // Guarda el valor de descripción en una variable para evitar llamadas repetidas
 
     if (description === "Ontziyek garbitu") {
-        user.puntos -= 2;
-    } else if (description === "Ontziyek jaso") {
-        user.puntos -= 1;
-    } else if (description === "Erropak ixigi") {
-        user.puntos -= 2;
-    } else if (description === "Erropak jaso") {
-        user.puntos -= 2;
-    } else if (description === "Bitrue garbitu") {
-        user.puntos -= 1;
-    } else if (description === "Kumune garbitu") {
-        user.puntos -= 2;
-    } else if (description === "Erretza pasa kuarto baten") {
-        user.puntos -= 1;
-    } else if (description === "Kristelak garbitu") {
-        user.puntos -= 2;
-    } else if (description === "Erretza pasa etxe osuen") {
-        user.puntos -= 2;
-    }
+      user.puntos -= 20;
+  } else if (description === "Ontziyek jaso") {
+      user.puntos -= 10;
+  } else if (description === "Erropak ixigi") {
+      user.puntos -= 20;
+  } else if (description === "Erropa txikiyek ixigi") {
+    user.puntos -= 20;
+} else if (description === "Erropa haundiyek ixigi") {
+  user.puntos -= 20;
+} else if (description === "Erropak jaso") {
+      user.puntos -= 20;
+  } else if (description === "Bitrue garbitu") {
+      user.puntos -= 10;
+  }else if (description === "Kumunzulue garbitu") {
+      user.puntos -= 20;
+  } else if (description === "Kumuneko ispilue garbiu") {
+      user.puntos -= 10;
+  } else if (description === "Erretza etxe osun") {
+      user.puntos -= 20;
+  } else if (description === "Erretza kumun + sukalde") {
+      user.puntos -= 10;
+  }else if (description === "Txabolan lanak") {
+    user.puntos -= 30;
+}else if (description === "Txakurrei jana eman") {
+  user.puntos -= 10;
+} else if (description === "Lorak ureztau") {
+  user.puntos -= 10;
+}else if (description === "Lorak garbiu") {
+      user.puntos -= 10;
+  } else if (description === "Kafie iñ") {
+    user.puntos -= 10;
+}else if (description === "Bazkaye/afaye iñ") {
+      user.puntos -= 20;
+  } else if (description === "5ok gaudenin mahai osue jaso") {
+      user.puntos -= 10;
+  }else if (description === "Konprak iñ") {
+    user.puntos -= 20;
+}else if (description === "Ogiye erosi") {
+  user.puntos -= 10;
+}else if (description === "Basurie jeitsi") {
+  user.puntos -= 10;
+}
   }
 
 }
