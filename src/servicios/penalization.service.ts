@@ -8,7 +8,7 @@ import { Penalization } from 'src/clases/penalization';
   providedIn: 'root'
 })
 export class PenalizationService {
-  private apiUrl = 'https://localhost:44379/Penalization/'; // Cambia la URL según corresponda
+  private apiUrl = 'https://hometaskapi-1.onrender.com/Penalization/'; // Cambia la URL según corresponda
 
   constructor(private http: HttpClient) { }
 
