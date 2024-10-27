@@ -100,7 +100,8 @@ export class TareasComponent implements OnInit {
   filterTasksByDate() {
     // Filtro por fecha seleccionada o fechas futuras
     this.filteredTareas = this.tareasFiltradas.filter((tarea) => {
-      const tareaDate = new Date(tarea.limitDate);
+      const tareaDate = new Date(tarea.limitDate); //Establecerle la hora a 00:00 
+      tareaDate.setHours(23, 59, 0, 0);
       return tareaDate >= this.selectedDate;
     });
   }
