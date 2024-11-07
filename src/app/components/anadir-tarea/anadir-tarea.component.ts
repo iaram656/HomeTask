@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import { TareaGeneral } from 'src/clases/tarea-general';
 import { User } from 'src/clases/user';
 import { TareaService } from 'src/servicios/tarea.service';
 import { UserService } from 'src/servicios/user.service';
@@ -15,19 +16,25 @@ export class AnadirTareaComponent {
   usuarios: User[] = []; 
   gordetzen = false;
   showCalendar = false;
+  tareas: TareaGeneral[]= [];
   constructor(private fb: FormBuilder, private alertController: AlertController, private tareaService: TareaService, private navCtrl: NavController , private userService: UserService) {
 
     this.tareaForm = this.fb.group({
-      description: ['', [Validators.required, Validators.minLength(5)]],
-      limitDate: ['', Validators.required],
-      userId: ['']
+      description: ['', [Validators.minLength(5)]],
+      limitDate: [''],
+      userId: ['', Validators.required],
+      tareaId: ['', Validators.required],
     });
   }
 
   ngOnInit(){
+    this.tareaForm.value.limitDate = new Date().toISOString();
     console.log("aa")
     this.userService.getUsers().subscribe(c => {
       this.usuarios = c;
+    })
+    this.tareaService.getTareasGenerales().subscribe(c => {
+      this.tareas = c;
     })
   }
 
@@ -46,6 +53,8 @@ export class AnadirTareaComponent {
   }
   
   onSubmit() {
+    this.tareaForm.value.limitDate = new Date().toISOString();
+    this.tareaForm.value.description = this.tareas.find(t => t.id === this.tareaForm.value.tareaId)?.desc;
     if (this.tareaForm.valid) {
       if (this.tareaForm.value.userId === '') {
         this.tareaForm.value.userId = 0;

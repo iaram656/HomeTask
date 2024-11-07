@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
+import { Penalization } from 'src/clases/penalization';
+import { PenalizationOrokorra } from 'src/clases/penalization-orokorra';
 import { User } from 'src/clases/user';
 import { PenalizationService } from 'src/servicios/penalization.service';
 import { TareaService } from 'src/servicios/tarea.service';
@@ -19,19 +21,23 @@ export class PenalizaziyuekComponent  implements OnInit {
   id: string | null= "";
   statusInicial: boolean = false;
   showCalendar = false;
-
-  constructor(private fb: FormBuilder,private alertController: AlertController,private route: ActivatedRoute, private penalizationService: PenalizationService, private navCtrl: NavController , private userService: UserService) {
+  penalizaziyuek: PenalizationOrokorra[] = [];
+  constructor(private fb: FormBuilder,private alertController: AlertController,private tareaService: TareaService, private route: ActivatedRoute, private penalizationService: PenalizationService, private navCtrl: NavController , private userService: UserService) {
 
     this.tareaForm = this.fb.group({
-      reason: ['', [Validators.required, Validators.minLength(5)]],
+      reason: ['', [ Validators.minLength(5)]],
       userId: ['', Validators.required],
       points: [''],
+      penId: ['', Validators.required],
     });
   }
 
   ngOnInit(){
     this.userService.getUsers().subscribe(c => {
       this.usuarios = c;
+    })
+    this.tareaService.getPenalizations().subscribe(c => {
+      this.penalizaziyuek = c;
     })
   }
 
@@ -49,6 +55,7 @@ export class PenalizaziyuekComponent  implements OnInit {
   }
   
   onSubmit() {
+    this.tareaForm.value.reason = this.penalizaziyuek.find(t => t.id === this.tareaForm.value.penId)?.desc;
     if (this.tareaForm.valid) {
       if (this.tareaForm.value.userId === '') {
         this.tareaForm.value.userId = 0;

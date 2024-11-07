@@ -102,9 +102,9 @@ export class TareaComponent  implements OnInit {
   } else if (description === "Erropak ixigi") {
       user.puntos += 20;
   } else if (description === "Erropa txikiyek ixigi") {
-    user.puntos += 20;
+    user.puntos += 10;
 } else if (description === "Erropa haundiyek ixigi") {
-  user.puntos += 20;
+  user.puntos += 10;
 } else if (description === "Erropak jaso") {
       user.puntos += 20;
   } else if (description === "Bitrue garbitu") {

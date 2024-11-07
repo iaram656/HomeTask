@@ -17,31 +17,13 @@
       <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <ion-item lines="none">
-            <ion-select formControlName="description" 
+            <ion-select formControlName="tareaId" 
                       interface="popover" 
                       placeholder="Iteko"
                       class="custom-select">
-              <ion-select-option value="Ontziyek garbitu">Ontziyek garbitu</ion-select-option>
-              <ion-select-option value="Ontziyek jaso">Ontziyek jaso</ion-select-option>
-              <ion-select-option value="Erropak ixigi">Erropak ixigi</ion-select-option>
-              <ion-select-option value="Erropak jaso">Erropak jaso</ion-select-option>
-              <ion-select-option value="Bitrue garbitu">Bitrue garbitu</ion-select-option>
-              <ion-select-option value="Kumunzulue garbitu">Kumunzulue garbitu</ion-select-option>
-              <ion-select-option value="Kumuneko ispilue garbiu">Kumuneko ispilue garbiu</ion-select-option>
-              <ion-select-option value="Erretza etxe osun">Erretza etxe osun</ion-select-option>
-              <ion-select-option value="Erretza kumun + sukalde">Erretza kumun + sukalde</ion-select-option>
-              <ion-select-option value="Erropa txikiyek ixigi">Erropa txikiyek ixigi</ion-select-option>
-              <ion-select-option value="Erropa haundiyek ixigi">Erropa haundiyek ixigi</ion-select-option>
-              <ion-select-option value="Txabolan lanak">Txabolan lanak</ion-select-option>
-              <ion-select-option value="Txakurrei jana eman">Txakurrei jana eman</ion-select-option>
-              <ion-select-option value="Lorak ureztau">Lorak ureztau</ion-select-option>
-              <ion-select-option value="Lorak garbiu">Lorak garbiu</ion-select-option>
-              <ion-select-option value="Kafie iñ">Kafie iñ</ion-select-option>
-              <ion-select-option value="Bazkaye/afaye iñ">Bazkaye/afaye iñ</ion-select-option>
-              <ion-select-option value="5ok gaudenin mahai osue jaso">5ok gaudenin mahai osue jaso</ion-select-option>
-              <ion-select-option value="Konprak iñ">Konprak iñ</ion-select-option>
-              <ion-select-option value="Ogiye erosi">Ogiye erosi</ion-select-option>
-              <ion-select-option value="Basurie jeitsi">Basurie jeitsi</ion-select-option>
+                      <ion-select-option *ngFor="let p of tareas" [value]="p.id">
+                        {{ p.desc }}
+                      </ion-select-option>
             </ion-select>
           </ion-item>
           <ion-note color="danger" *ngIf="tareaForm.get('description')?.invalid && tareaForm.get('description')?.touched">
@@ -49,31 +31,7 @@
           </ion-note>
         </div>
 
-        <div class="form-group">
-          <ion-item lines="none" class="date-item">
-            <ion-label style="color:white">Noizko inber da?</ion-label>
-            <ion-button (click)="toggleCalendar()" fill="solid" class="date-button">
-              Aukerau egune
-            </ion-button>
-          </ion-item>
-          
-          <ion-item *ngIf="showCalendar" lines="none">
-            <ion-datetime 
-              formControlName="limitDate" 
-              display-format="DD/MM/YYYY HH:mm"  
-              placeholder="Selecciona fecha y hora" 
-              presentation="date-time" 
-              cancel-text="Cancelar"
-              done-text="Aceptar"
-              class="custom-datetime"
-              style="color: black">
-            </ion-datetime>
-          </ion-item>
-          <ion-note color="danger" *ngIf="tareaForm.get('limitDate')?.invalid && tareaForm.get('limitDate')?.touched">
-            Aukerau data bat
-          </ion-note>
-        </div>
-
+        
         <div class="form-group">
           <ion-item lines="none">
             <ion-select formControlName="userId" 

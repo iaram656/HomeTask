@@ -3,7 +3,7 @@ import { TareaService } from 'src/servicios/tarea.service';
 import { Tarea } from 'src/clases/tarea';
 import { UserService } from 'src/servicios/user.service';
 import { User } from 'src/clases/user';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -36,7 +36,8 @@ export class TareasComponent implements OnInit {
     private tareaService: TareaService,
     private router: Router,
     private userService: UserService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertController: AlertController
   ) {
     this.tareaForm = this.fb.group({
       users: [''],
@@ -98,13 +99,19 @@ export class TareasComponent implements OnInit {
   }
 
   filterTasksByDate() {
-    // Filtro por fecha seleccionada o fechas futuras
+    // Establecer la hora de selectedDate a medianoche para comparar solo la fecha
+    const selectedDate = new Date(this.selectedDate);
+    selectedDate.setHours(0, 0, 0, 0);
+
     this.filteredTareas = this.tareasFiltradas.filter((tarea) => {
-      const tareaDate = new Date(tarea.limitDate); //Establecerle la hora a 00:00 
-      tareaDate.setHours(23, 59, 0, 0);
-      return tareaDate >= this.selectedDate;
+      const tareaDate = new Date(tarea.limitDate);
+      tareaDate.setHours(0, 0, 0, 0); // Establecer la hora de la tarea a medianoche
+
+      // Comparar solo la fecha, ignorando la hora
+      return tareaDate.getTime() === selectedDate.getTime();
     });
-  }
+}
+
 
   nextDay() {
     this.selectedDate = new Date(this.selectedDate.getTime());
@@ -120,10 +127,31 @@ export class TareasComponent implements OnInit {
     this.filterTasksByDate();
   }
 
-  editTarea(tarea: Tarea) {
-    this.router.navigate(['/edit-tarea', tarea.id]);
+  deleteTarea(tarea: Tarea) {
+    const confirmacion = confirm("Seguru lana borrau nahi dezula?");
+    if (confirmacion) {
+        this.tareaService.deleteTarea(tarea.id).subscribe(async c => {
+          if(c){
+            this.tareas = this.tareas.filter((t) => t.id !== tarea.id);
+            await this.presentAlert('Lana ondo borrau da');
+            this.obtenerTareas();
+          }else{
+            await this.presentAlert('Ezin izen da lana borrau');
+          }
+        })
+        
+    } else {
+        console.log("Eliminación cancelada");
+    }
   }
-
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: message,
+      buttons: ['ITXI']
+    });
+    await alert.present();
+  }
   goBackHome() {
     this.navCtrl.navigateBack('/home');
   }

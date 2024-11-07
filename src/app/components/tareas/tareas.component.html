@@ -59,7 +59,7 @@
             <div class="task-main">
               <h2>{{ tarea.description }}</h2>
               <p class="date-text">
-                <strong>Noizko inber:</strong> {{ tarea.limitDate | date: 'dd/MM/yyyy HH:mm' }}
+                <strong>Noiz inda:</strong> {{ tarea.limitDate | date: 'dd/MM/yyyy HH:mm' }}
               </p>
             </div>
             
@@ -69,23 +69,10 @@
               </span>
               
               <div class="task-actions">
-                <ion-icon 
-                  *ngIf="!tarea.status" 
-                  name="time" 
-                  class="status-icon pending"
-                  title="Tarea no completada">
-                </ion-icon>
-                <ion-icon 
-                  *ngIf="tarea.status" 
-                  name="checkmark-circle" 
-                  class="status-icon completed"
-                  title="Tarea completada">
-                </ion-icon>
-                
                 <ion-button fill="clear" 
-                            class="edit-button"
-                            (click)="editTarea(tarea)">
-                  <ion-icon name="pencil"></ion-icon>
+                            class="delete-button"
+                            (click)="deleteTarea(tarea)">
+                  <ion-icon name="trash"></ion-icon>
                 </ion-button>
               </div>
             </div>
