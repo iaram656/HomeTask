@@ -10,8 +10,8 @@ import { TareaGeneral } from 'src/clases/tarea-general';
   providedIn: 'root'
 })
 export class TareaService {
-  //private apiUrl = 'https://hometaskapi-1.onrender.com/Tarea/'; // Cambia la URL según corresponda
-  private apiUrl = 'https://localhost:44379/Tarea/';
+  private apiUrl = 'https://hometaskapi-1.onrender.com/Tarea/'; // Cambia la URL según corresponda
+  //private apiUrl = 'https://localhost:44379/Tarea/';
   constructor(private http: HttpClient) { }
 
   httpOptions(){
