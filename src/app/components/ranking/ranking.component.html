@@ -26,8 +26,11 @@
             <!-- Medallas para los primeros -->
             <div *ngIf="i === 0" class="medal gold">🏆</div>
             <div *ngIf="i === 1" class="medal silver">🥈</div>
-            <div *ngIf="i === 2" class="medal bronze">🥉</div>
-            <div *ngIf="i === usuarios.length - 1" class="medal last">😢</div>
+
+
+            <div *ngIf="i === usuarios.length - 1" class="penalty">-20€</div>
+            <div *ngIf="i === usuarios.length - 2" class="penalty">-10€</div>
+            <div *ngIf="i === usuarios.length - 3" class="penalty">-5€</div>
           </div>
 
           <div class="user-info">

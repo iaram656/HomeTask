@@ -20,6 +20,7 @@ export class PenalizationService {
     }
   }
   addPenalization(pen: Penalization): Observable<boolean> {
+    pen.points = 0;
     return this.http.post<boolean>(this.apiUrl, JSON.stringify(pen), this.httpOptions()).pipe(
       retry(5),  // Reintentar hasta 5 veces en caso de error
       catchError((error) => {
